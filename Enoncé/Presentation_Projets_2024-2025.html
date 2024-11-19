@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Equipe pédagogique pour le Master II Biostatistique">
+
+<title>Projets en analyse de données longitudinales de l’UE STA302</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Presentation_Projets_2024-2025_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Presentation_Projets_2024-2025_files/libs/quarto-html/quarto.js"></script>
+<script src="Presentation_Projets_2024-2025_files/libs/quarto-html/popper.min.js"></script>
+<script src="Presentation_Projets_2024-2025_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Presentation_Projets_2024-2025_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Presentation_Projets_2024-2025_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Presentation_Projets_2024-2025_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Presentation_Projets_2024-2025_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Presentation_Projets_2024-2025_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Presentation_Projets_2024-2025_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projets en analyse de données longitudinales de l’UE STA302</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Equipe pédagogique pour le Master II Biostatistique </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="déroulé-des-projets" class="level2">
+<h2 class="anchored" data-anchor-id="déroulé-des-projets">Déroulé des projets</h2>
+<p>Le projet de l’UE STA302 sera réalisé par groupes de 3 personnes autour de questions de recherche dans la progression de l’atrophie multi-systématisée. <strong>Les groupes travaillant sur le même sujet devront travailler séparément</strong>. Les étudiants en apprentissage devront se répartir dans des groupes différents.</p>
+<p>Les analyses pourront être réalisées sous SAS ou R (ou les deux).</p>
+<section id="rendu" class="level3">
+<h3 class="anchored" data-anchor-id="rendu">Rendu</h3>
+<p>Chaque groupe devra fournir un rapport de 5 pages (aucun dépassement autorisé) structuré de manière très classique :</p>
+<ul>
+<li><p>introduction (<strong><em>15 lignes maximum</em></strong>):</p>
+<ul>
+<li><p>une <strong>brève</strong> introduction (<strong>Attention:</strong> je ne demande pas une revue de la littérature - il s’agit d’un travail statistique avant tout)</p></li>
+<li><p>un objectif clairement énoncé explicitant l’analyse statistique mise en oeuvre. (<strong>Attention:</strong> réaliser un modèle mixte n’est pas un objectif!)</p></li>
+</ul></li>
+<li><p>méthodes:</p>
+<ul>
+<li><p>une brève description de la cohorte étudiée</p></li>
+<li><p>une justification de l’analyse statistique envisagée</p></li>
+<li><p>la description des modèles entrepris. <strong>Attention:</strong> équation à donner précisément pour au moins 1 modèle</p></li>
+<li><p>le plan d’analyse statistique</p></li>
+</ul></li>
+<li><p>résultats:</p>
+<ul>
+<li><p>la description des données incluant des informations sur le suivi longitudinal (e.g.&nbsp;nombre de mesures par sujet)</p></li>
+<li><p>les résultats de l’analyse statistique clairement décrits, quantitativement et au travers de figures (voir ci-dessous)</p></li>
+</ul></li>
+<li><p>conclusion:</p>
+<ul>
+<li>une petite discussion des résultats et des analyses réalisées en insistant sur les limites et ce qui pourrait/devrait être fait. Je n’attends pas une comparaison des résultats épidémiologiques avec la littérature mais une discussion plus orientée sur l’analyse statistique.</li>
+</ul></li>
+</ul>
+<p>Un maximum de 5 figures/tableaux/schémas pourra être inclus en fin de rapport et ne sera pas comptabilisé dans les 5 pages (<strong>Attention:</strong> le nombre de tableaux ne pourra pas dépasser 2). Chaque figure/tableau/schéma inclus devra être précisément décrit dans le texte. Ne pas oublier que les graphiques sont très utiles pour décrire les données complexes ET visualiser les résultats.</p>
+<p>La présentation des résultats est laissée au choix des étudiants. Une interprétation rigoureuse des analyses est attendue.</p>
+<p>J’insiste sur le fait que la méthode et les résultats doivent être extrêmement bien décrits et structurés, et que l’intro doit rester brève. De plus, j’attends des interprétations chiffrées des estimations en graphe/tableau mais aussi dans le texte. Je ne veux pas uniquement des “c’est significatif”, “ce n’est pas significatif”. Le lecteur doit bien comprendre les résultats à la lecture du texte.</p>
+<p>Le rapport sera à envoyer par mail en pdf pour le <strong>dimanche 10 décembre 2023</strong>. Un script doit permettre de reproduire 100% des analyses. Il sera envoyé sous format éditable (.rmd et/ou .sas).</p>
+</section>
+<section id="grille-dévaluation" class="level3">
+<h3 class="anchored" data-anchor-id="grille-dévaluation">Grille d’évaluation</h3>
+<p>La grille est la suivante:</p>
+<ul>
+<li><p>objectif clairement défini</p></li>
+<li><p>modèle choisi adapté pour répondre à l’objectif, correctement justifié et correctement décrit</p></li>
+<li><p>stratégie analyse pertinente et bien décrite</p></li>
+<li><p>description des données assez informative</p></li>
+<li><p>description des résultats correcte et appropriée</p></li>
+<li><p>interprétation des estimations correctes.</p></li>
+<li><p>graphes et tableaux pertinents, correctement décrits et appropriés</p></li>
+<li><p>recul sur les résultats, sur les analyses et leurs limites</p></li>
+<li><p>conclusion</p></li>
+<li><p><strong>qualité de la rédaction et respect des consignes</strong></p></li>
+</ul>
+</section>
+<section id="restitution" class="level3">
+<h3 class="anchored" data-anchor-id="restitution">Restitution</h3>
+<p>Chaque groupe devra aussi préparer pour la rentrée de <strong>janvier 2025</strong> une présentation orale de son projet en 10 mn détaillant notamment l’approche statistique et les résultats. Les étudiants devront se partager le temps de parole. S’en suivra une discussion des résultats, limites et difficultés du projet avec les autres groupes. <strong>Chaque groupe devra poser des questions aux autres groupes pendant la discussion</strong>.</p>
+<p>Le projet sera principalement noté sur la base du rapport écrit et servira de contrôle continu pour l’UE STA 302. Les présentations orales ont un double objectif:</p>
+<ul>
+<li><p>préparer à la restitution synthétique d’analyses statistiques, comme cela est demandé à tout statisticien en poste, et à plus court terme en soutenance de stage;</p></li>
+<li><p>permettre de revoir et discuter les notions essentielles dans l’analyse des données longitudinales avant l’examen final. <strong>Je vous invite à préparer vos questions en amont</strong>.</p></li>
+</ul>
+</section>
+<section id="suivi-de-projet" class="level3">
+<h3 class="anchored" data-anchor-id="suivi-de-projet">Suivi de projet</h3>
+<p>Pendant la durée du projet, sont prévues 3 séances d’une heure pour répondre aux questions des groupes:</p>
+<ul>
+<li>Lundi 25/11 à 17h - zoom: <a href="https://u-bordeaux-fr.zoom.us/j/81780257817?pwd=aXpKSGRhRTQ0U1ROWC8wQ3dGTlg0QT09"><code>https://u-bordeaux-fr.zoom.us/j/81780257817?pwd=aXpKSGRhRTQ0U1ROWC8wQ3dGTlg0QT09</code></a> Meeting ID: 817 8025 7817; Passcode: 845172</li>
+<li>vendredi 29/11 à 17h - zoom: même lien</li>
+<li>mardi 3/12 à 17h - présentiel: salle 55</li>
+</ul>
+</section>
+</section>
+<section id="sujet-progression-de-latrophie-multi-systématisée" class="level2">
+<h2 class="anchored" data-anchor-id="sujet-progression-de-latrophie-multi-systématisée">Sujet: Progression de l’atrophie multi-systématisée</h2>
+<p>L’atrophie Multi-Systématisée (AMS) est une maladie neurodégénérative rare qui se caractérise par la présence variable d’un syndrome parkinsonien, d’un syndrome cérébelleux et d’une dysautonomie. Le diagnostic repose sur des critères cliniques dont la confirmation nécessite une évaluation anatomo-pathologique post-mortem du cerveau. Cette maladie, qui évolue rapidement avec une survie médiane inférieure à 10 ans [1,2], reste très méconnue à ce jour et il n’existe aucun traitement pour apporter un soulagement symptomatique palpable ou pour ralentir la progression inéluctable.</p>
+<p>Depuis 2007, les hôpitaux de Bordeaux et de Toulouse sont devenus centre national de référence maladie rare (CRMR) pour l’AMS et ont pu constituer une cohorte ouverte de patients suivis à partir de leur première venue au centre de référence. Cette cohorte a fait l’objet d’une déclaration CNIL, les patients signant un consentement de participation en conséquence. Les patients sont suivis annuellement et de manière standardisée dans les deux centres. Au cours de ce suivi annuel, sont recueillies plusieurs échelles dont l’UMSARS [3]. L’UMSARS est conçue pour évaluer les différentes sphères touchées dans le cadre de l’AMS. Elle est constituée de quatre sous domaines : le domaine fonctionnel UMSARS I, la fonction motrice UMSARS II, le handicap UMSARS IV et la tension artérielle mesurée couchée et debout sur 10 minutes UMSARS III (un élément du système nerveux autonome).</p>
+<p>Au cours de leur maladie, les patients peuvent développer des troubles du sommeil à type de syndrome d’apnées du sommeil ou des troubles respiratoires à type de stridor correspondant à une fermeture anormale des cordes vocales. Dans ces situations, il peut y avoir indication à mettre une ventilation nocturne à pression positive, appelée CPAP (Continuous Positive Airway Pressure), soit en présence de stridor, soit en présence d’un syndrome d’apnée du sommeil identifié par un index d’apnée hypopnée (IAH) supérieur à 15/h. L’intérêt de cette CPAP est d’améliorer la ventilation nocturne des patients et ainsi améliorer l’oxygénation du cerveau la nuit. Le sommeil du patient est ainsi plus récupérateur et on espère maintenir une meilleure intégrité cérébrale.</p>
+<ul>
+<li><p><strong>sujet A:</strong> évaluer dans quelle mesure la mise en place d’une CPAP au cours du suivi des patients change la trajectoire de la progression clinique mesurée par le score combiné d’atteinte motrice et fonctionnelle (UMSARS I+UMSARS II). Ce sujet sera réalisé dans la cohorte entière en prenant en compte la CPAP comme une variable dépendante du temps.</p></li>
+<li><p><strong>sujet B:</strong> évaluer dans quelle mesure la mise en place d’une CPAP au cours du suivi des patients change la trajectoire de la qualité de vie mesurée par le score de la MSAQoL. Ce sujet sera réalisé dans la cohorte entière en prenant en compte la CPAP comme une variable dépendante du temps.</p></li>
+<li><p><strong>sujet C:</strong> évaluer dans quelle mesure la mise en place d’une CPAP au cours du suivi des patients change la trajectoire de handicap mesuré par le score UMSARS partie 4 (UMSARS4), score ordinal à 5 niveaux. Ce sujet sera réalisé dans la cohorte entière en prenant en compte la CPAP comme une variable dépendante du temps.</p></li>
+<li><p><strong>sujet D:</strong> dans la population de patients ayant une indication de mise en place de CPAP, évaluer l’association entre l’utilisation effective de CPAP et la trajectoire subséquente de progression clinique mesurée par le score combiné d’atteinte motrice et fonctionnelle (UMSARS I+UMSARS II). Ce sujet sera réalisé dans l’échantillon de patients pour qui la présence de troubles respiratoires ou du sommeil a fait posé l’indication de mise en place d’une CPAP. Le temps d’intérêt sera la temps depuis la mise en place d’une CPAP.</p></li>
+<li><p><strong>sujet E:</strong> dans la population de patients ayant une indication de mise en place de CPAP, évaluer l’association entre l’utilisation effective de CPAP et la trajectoire subséquente de handicap mesuré par le score UMSARS partie 4 (UMSARS4), score ordinal à 5 niveaux. Ce sujet sera réalisé dans l’échantillon de patients pour qui la présence de troubles respiratoires ou du sommeil a fait posé l’indication de mise en place d’une CPAP. Le temps d’intérêt sera la temps depuis la mise en place d’une CPAP.</p></li>
+</ul>
+<p>Dans chaque projet, les facteurs de confusion potentiels suivants devront être considérés: âge, le sexe, le type d’AMS (AMS parkinsonienne, AMS cérébelleuse), l’ancienneté de la maladie au début du suivi, et éventuellement la nature des premiers symptomes.</p>
+</section>
+<section id="données" class="level2">
+<h2 class="anchored" data-anchor-id="données">Données</h2>
+<p><strong>Les données de la cohorte sont confidentielles. Elles ne doivent pas être partagées. Elles seront utilisées uniquement pendant la durée du projet et devront absolument être effacées de vos ordinateurs après. Un engagement écrit devra être signé pour obtenir les données.</strong></p>
+</section>
+<section id="références" class="level2">
+<h2 class="anchored" data-anchor-id="références">Références</h2>
+<p>1. Foubert-Samier A, Pavy-Le Traon A, Guillet F, Le-Goff M, Helmer C, Tison F, et al.&nbsp;Disease progression and prognostic factors in multiple system atrophy: A prospective cohort study. Neurobiol Dis. 2020;139:104813.</p>
+<p>2. Wenning GK, Geser F, Krismer F, Seppi K, Duerr S, Boesch S, et al.&nbsp;The natural history of multiple system atrophy: a prospective European cohort study. Lancet Neurol. mars 2013;12(3):264‑74.</p>
+<p>3. Wenning GK, Tison F, Seppi K, Sampaio C, Diem A, Yekhlef F, et al.&nbsp;Development and validation of the Unified Multiple System Atrophy Rating Scale (UMSARS). Mov Disord. déc 2004;19(12):1391‑402.</p>
+<p>4. Schrag A, Selai C, Mathias C, <em>et al.</em> Measuring health-related quality of life in MSA: the MSA-QoL. <em>Mov Disord</em> 2007; <strong>22</strong>:2332–8.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
