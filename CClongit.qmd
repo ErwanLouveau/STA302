@@ -31,7 +31,7 @@ library(mice)
 
 ## Gestions des données
 ```{r}
-ams <- readRDS("/Users/soizicdieulouard/Downloads/database_ams_a_b_c.rds")
+ams <- readRDS("Data/database_ams_a_b_c.rds")
 head(ams)
 str(ams)
 ams$SEXE <- ifelse(ams$SEXE==1,0,1)
@@ -269,7 +269,7 @@ ggplot(ams, aes(x = delai_consult_vis0, y = SCHRAG_TOT, color = CPAP, group = id
 
 ```
 
-#### Adéquation
+#### Adéquatiion
 
 ```{r}
 plot(m1cut)
