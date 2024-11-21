@@ -69,9 +69,9 @@ sum(is.na(amsNA))
 
 ## Description des données
 
-#### Changement de groupe CPAP au cours du temps
+### Changement de groupe CPAP au cours du temps
 
-Passage de 1 à 0 :
+#### Passage de 1 à 0 :
 
 ```{r}
 
@@ -91,7 +91,7 @@ print(individuals_with_transition)
 ##pas d'individus avec un passage de CPAP 1 à 0
 ```
 
-Passage de 0 à 1 :
+#### Passage de 0 à 1 :
 
 ```{r}
 ids_with_cpap_change <- ams %>%
@@ -108,22 +108,22 @@ ams_cpap_change_1 <- ams_cpap_change %>% group_by(id) %>% arrange(desc(delai_con
 #53 individus passe de CPAP à non CPAP
 ```
 
-#### Statut CPAP
+### Statut CPAP
 
-CPAP = 1 :
+#### CPAP = 1 :
 
 ```{r}
 ams_cpap1 <- ams %>% filter(CPAP == 1)
 ```
 
-CPAP = 0 :
+#### CPAP = 0 :
 
 ```{r}
 ams_cpap0 <- ams %>% filter(CPAP == 0)
 
 ```
 
-#### Nombre de visites par individus 
+### Nombre de visites par individus 
 
 ```{r}
 compte_lignes <- ams %>%count(id)
@@ -133,7 +133,7 @@ summary(compte_lignes)
 hist(compte_lignes$n)
 ```
 
-#### Evolution moyenne approchée par une régression 
+### Evolution moyenne approchée par une régression 
 
 ```{r}
 p <- (ggplot(ams)
@@ -146,7 +146,7 @@ p <- (ggplot(ams)
 p
 ```
 
-#### Spaghetti plots
+### Spaghetti plots
 
 ```{r}
 ##spaghettis plot
@@ -197,7 +197,7 @@ plot(x = ams$UMTOT, y=ams$SCHRAG_TOT)
 
 ## Modèles 
 
-#### Avec SCHRAG
+### Avec SCHRAG
 
 ```{r}
 ##SCHRAG seul, intercept aleatoire
@@ -223,7 +223,7 @@ AIC(m1pente,m1pente_int,m1complet,m1cut)
 BIC(m1pente,m1pente_int,m1complet,m1cut)
 ```
 
-#### Avec UMTOT
+### Avec UMTOT
 
 ```{r}
 ##UMTOT seul, intercept aleatoire
@@ -245,7 +245,7 @@ summary(m2cut)
 AIC(m2pente,m2pente_int,m2complet,m2cut)
 ```
 
-#### LME chez ceux qui changent de groupe (cpap 0 à 1)
+### LME chez ceux qui changent de groupe (cpap 0 à 1)
 
 ```{r}
 ams_cpap_change
@@ -254,7 +254,7 @@ m3complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 + CPAP + DUREE_SYMPT_VIS
 summary(m3complet)
 ```
 
-#### Exploratoire
+### Exploratoire
 
 ```{r}
 # effets fixes prédits
@@ -269,7 +269,7 @@ ggplot(ams, aes(x = delai_consult_vis0, y = SCHRAG_TOT, color = CPAP, group = id
 
 ```
 
-#### Adéquatiion
+### Adéquatiion
 
 ```{r}
 plot(m1cut)
