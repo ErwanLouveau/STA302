@@ -20,8 +20,8 @@ editor: visual
 
 ## Chargement des packages
 
-```{r}
-install.packages("ggeffects")
+```{r, message=FALSE, warning=FALSE}
+# install.packages("ggeffects")
 library(nlme)
 library(dplyr)
 library(ggplot2)
@@ -30,7 +30,7 @@ library(mice)
 ```
 
 ## Gestions des données
-```{r}
+```{r, message=FALSE}
 ams <- readRDS("Data/database_ams_a_b_c.rds")
 head(ams)
 str(ams)
@@ -192,7 +192,7 @@ AIC(regSUM,regMul)
 ##reg SUM mieux
 
 plot(x = ams$UMTOT, y=ams$SCHRAG_TOT)
-abline(reg$coefficients)
+# abline(reg$coefficients)
 ```
 
 ## Modèles 

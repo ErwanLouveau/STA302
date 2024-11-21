@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Projet STA302</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="CClongit_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CClongit_files/libs/quarto-html/quarto.js"></script>
+<script src="CClongit_files/libs/quarto-html/popper.min.js"></script>
+<script src="CClongit_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="CClongit_files/libs/quarto-html/anchor.min.js"></script>
+<link href="CClongit_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CClongit_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="CClongit_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="CClongit_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="CClongit_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>
+  h1 {color: #0F2769;}
+  h2 {color: #2148B2;}
+  h3 {color: #3C72DC;}
+  h4 {color: #90AEFF;}
+</style>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#chargement-des-packages" id="toc-chargement-des-packages" class="nav-link active" data-scroll-target="#chargement-des-packages">Chargement des packages</a></li>
+  <li><a href="#gestions-des-données" id="toc-gestions-des-données" class="nav-link" data-scroll-target="#gestions-des-données">Gestions des données</a></li>
+  <li><a href="#description-des-données" id="toc-description-des-données" class="nav-link" data-scroll-target="#description-des-données">Description des données</a></li>
+  <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles">Modèles</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projet STA302</h1>
+<p class="subtitle lead">Master 2 Biostatistique 24/25 (ISPED)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="chargement-des-packages" class="level2">
+<h2 class="anchored" data-anchor-id="chargement-des-packages">Chargement des packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggeffects")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:nlme':
+
+    collapse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'mice'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    cbind, rbind</code></pre>
+</div>
+</div>
+</section>
+<section id="gestions-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="gestions-des-données">Gestions des données</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ams <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/database_ams_a_b_c.rds"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+     id delai_consult_vis0 DUREE_SYMPT_VIS0 AGE_VISITE0 UMSARS1and2_TOT UMSARS4
+  &lt;int&gt;              &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+1     1              0                    2        53.7              28       1
+2     1              1.01                 2        53.7              34       2
+3     2              0                    2        62.9              18       1
+4     2              0.287                2        62.9              NA      NA
+5     2              1.57                 2        62.9              43       2
+6     2              2.75                 2        62.9              53       3
+# ℹ 8 more variables: SCHRAG_TOT &lt;dbl&gt;, delaiDecesCensor &lt;dbl&gt;, anyDC &lt;dbl&gt;,
+#   DIAG0 &lt;dbl&gt;, SPT1CERE &lt;dbl&gt;, SPT1DYS &lt;dbl&gt;, SEXE &lt;dbl&gt;, CPAP &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [2,653 × 14] (S3: tbl_df/tbl/data.frame)
+ $ id                : int [1:2653] 1 1 2 2 2 2 2 2 2 2 ...
+ $ delai_consult_vis0: num [1:2653] 0 1.013 0 0.287 1.574 ...
+ $ DUREE_SYMPT_VIS0  : num [1:2653] 2 2 2 2 2 2 2 2 2 2 ...
+ $ AGE_VISITE0       : num [1:2653] 53.7 53.7 62.9 62.9 62.9 ...
+ $ UMSARS1and2_TOT   : num [1:2653] 28 34 18 NA 43 53 44 52 55 54 ...
+  ..- attr(*, "label")= chr "UMSARS : somme UMSARS1 et UMSARS2"
+ $ UMSARS4           : num [1:2653] 1 2 1 NA 2 3 2 3 3 3 ...
+  ..- attr(*, "label")= chr "UMSARS4 échelle invalidité"
+ $ SCHRAG_TOT        : num [1:2653] NA 62 50 NA NA 107 NA 65 NA NA ...
+  ..- attr(*, "label")= chr "SCHRAG score total"
+ $ delaiDecesCensor  : num [1:2653] 4.18 4.18 6.8 6.8 6.8 ...
+ $ anyDC             : num [1:2653] 1 1 1 1 1 1 1 1 1 1 ...
+ $ DIAG0             : num [1:2653] 1 1 2 2 2 2 2 2 2 2 ...
+ $ SPT1CERE          : num [1:2653] 0 0 1 1 1 1 1 1 1 1 ...
+ $ SPT1DYS           : num [1:2653] 0 0 1 1 1 1 1 1 1 1 ...
+ $ SEXE              : num [1:2653] 1 1 1 1 1 1 1 1 1 1 ...
+ $ CPAP              : num [1:2653] 0 0 0 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>SEXE <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ams<span class="sc">$</span>SEXE<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>DIAG0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ams<span class="sc">$</span>DIAG0<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>anyDC <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>anyDC)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>DIAG0<span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>DIAG0)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>SPT1CERE<span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>SPT1CERE)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>SPT1DYS<span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>SPT1DYS)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>SEXE<span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>SEXE)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>CPAP<span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ams<span class="sc">$</span>CPAP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Groupement pour avoir une ligne par individu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ams2 <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(delai_consult_vis0)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(id)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ams2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 784 × 14
+# Groups:   id [784]
+      id delai_consult_vis0 DUREE_SYMPT_VIS0 AGE_VISITE0 UMSARS1and2_TOT UMSARS4
+   &lt;int&gt;              &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1              1.01                 2        53.7              34       2
+ 2     2              6.75                 2        62.9              NA       3
+ 3     3              0.997                1        66.9              64       3
+ 4     4              0                    3        74.2              46       3
+ 5     5              6.38                 5        60.9              72       4
+ 6     6              0                    2        74.3              22       1
+ 7     7              0.663                8        60.0              50       3
+ 8     8              0                    4        49.2              42       2
+ 9     9              0                    4        42.5              60       4
+10    10              0                    5        58.0              35      NA
+# ℹ 774 more rows
+# ℹ 8 more variables: SCHRAG_TOT &lt;dbl&gt;, delaiDecesCensor &lt;dbl&gt;, anyDC &lt;fct&gt;,
+#   DIAG0 &lt;fct&gt;, SPT1CERE &lt;fct&gt;, SPT1DYS &lt;fct&gt;, SEXE &lt;fct&gt;, CPAP &lt;fct&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ams2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id        delai_consult_vis0 DUREE_SYMPT_VIS0  AGE_VISITE0   
+ Min.   :  1.0   Min.   : 0.000     Min.   : 0.000   Min.   :42.45  
+ 1st Qu.:196.8   1st Qu.: 0.000     1st Qu.: 3.000   1st Qu.:59.03  
+ Median :392.5   Median : 1.265     Median : 4.000   Median :65.35  
+ Mean   :392.5   Mean   : 1.993     Mean   : 4.368   Mean   :65.02  
+ 3rd Qu.:588.2   3rd Qu.: 3.120     3rd Qu.: 6.000   3rd Qu.:70.77  
+ Max.   :784.0   Max.   :12.769     Max.   :16.000   Max.   :84.55  
+                                    NA's   :2        NA's   :2      
+ UMSARS1and2_TOT    UMSARS4        SCHRAG_TOT     delaiDecesCensor  anyDC    
+ Min.   :18.00   Min.   :1.000   Min.   : 22.00   Min.   :-4.663   0   :224  
+ 1st Qu.:49.00   1st Qu.:2.000   1st Qu.: 75.00   1st Qu.: 1.071   1   :559  
+ Median :62.00   Median :3.000   Median : 95.00   Median : 2.491   NA's:  1  
+ Mean   :61.60   Mean   :3.276   Mean   : 93.92   Mean   : 2.945             
+ 3rd Qu.:75.75   3rd Qu.:4.000   3rd Qu.:113.50   3rd Qu.: 4.146             
+ Max.   :97.00   Max.   :5.000   Max.   :157.00   Max.   :14.604             
+ NA's   :94      NA's   :67      NA's   :469      NA's   :1                  
+  DIAG0     SPT1CERE   SPT1DYS      SEXE     CPAP   
+ 0   :529   0   :541   0   :446   0   :366   0:721  
+ 1   :250   1   :242   1   :337   1   :416   1: 63  
+ NA's:  5   NA's:  1   NA's:  1   NA's:  2          
+                                                    
+                                                    
+                                                    
+                                                    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ams2<span class="sc">$</span>anyDC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+224 559 </code></pre>
+</div>
+</div>
+<section id="données-manquantes" class="level4">
+<h4 class="anchored" data-anchor-id="données-manquantes">Données manquantes</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(ams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id delai_consult_vis0 CPAP delaiDecesCensor anyDC SPT1CERE SPT1DYS
+1114  1                  1    1                1     1        1       1
+1216  1                  1    1                1     1        1       1
+18    1                  1    1                1     1        1       1
+48    1                  1    1                1     1        1       1
+4     1                  1    1                1     1        1       1
+12    1                  1    1                1     1        1       1
+23    1                  1    1                1     1        1       1
+213   1                  1    1                1     1        1       1
+1     1                  1    1                1     1        1       1
+1     1                  1    1                1     1        1       1
+1     1                  1    1                1     1        1       1
+1     1                  1    1                1     1        1       1
+1     1                  1    1                0     0        0       0
+      0                  0    0                1     1        1       1
+     DUREE_SYMPT_VIS0 AGE_VISITE0 SEXE DIAG0 UMSARS4 UMSARS1and2_TOT SCHRAG_TOT
+1114                1           1    1     1       1               1          1
+1216                1           1    1     1       1               1          0
+18                  1           1    1     1       1               0          1
+48                  1           1    1     1       1               0          0
+4                   1           1    1     1       0               1          1
+12                  1           1    1     1       0               1          0
+23                  1           1    1     1       0               0          1
+213                 1           1    1     1       0               0          0
+1                   1           1    1     0       1               1          1
+1                   1           1    1     0       1               1          0
+1                   1           1    1     0       0               0          0
+1                   0           0    0     0       0               0          0
+1                   0           0    0     0       0               0          0
+                    2           2    2     5     255             305       1493
+         
+1114    0
+1216    1
+18      1
+48      2
+4       1
+12      2
+23      2
+213     3
+1       1
+1       2
+1       4
+1       7
+1      11
+     2068</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##ams sans les données manquantes</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>amsNA <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(amsNA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="description-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="description-des-données">Description des données</h2>
+<section id="changement-de-groupe-cpap-au-cours-du-temps" class="level4">
+<h4 class="anchored" data-anchor-id="changement-de-groupe-cpap-au-cours-du-temps">Changement de groupe CPAP au cours du temps</h4>
+<p>Passage de 1 à 0 :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identifier les individus avec un passage de 1 à 0 </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>transitions <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(delai_consult_vis0) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cpap_lag =</span> <span class="fu">lag</span>(CPAP)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">transition_1_to_0 =</span> <span class="fu">any</span>(cpap_lag <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> CPAP <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>individuals_with_transition <span class="ot">&lt;-</span> transitions <span class="sc">%&gt;%</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(transition_1_to_0 <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(individuals_with_transition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">##pas d'individus avec un passage de CPAP 1 à 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Passage de 0 à 1 :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ids_with_cpap_change <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">has_transition =</span> <span class="fu">any</span>(CPAP <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="fu">lag</span>(CPAP) <span class="sc">==</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(has_transition) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>ams_cpap_change <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">%in%</span> ids_with_cpap_change)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#on regroupe 1 ligne par indiv:</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>ams_cpap_change_1 <span class="ot">&lt;-</span> ams_cpap_change <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(delai_consult_vis0)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(id)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#53 individus passe de CPAP à non CPAP</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="statut-cpap" class="level4">
+<h4 class="anchored" data-anchor-id="statut-cpap">Statut CPAP</h4>
+<p>CPAP = 1 :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ams_cpap1 <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CPAP <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>CPAP = 0 :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ams_cpap0 <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CPAP <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="nombre-de-visites-par-individus" class="level4">
+<h4 class="anchored" data-anchor-id="nombre-de-visites-par-individus">Nombre de visites par individus</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>compte_lignes <span class="ot">&lt;-</span> ams <span class="sc">%&gt;%</span><span class="fu">count</span>(id)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(compte_lignes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 784 × 2
+      id     n
+   &lt;int&gt; &lt;int&gt;
+ 1     1     2
+ 2     2    12
+ 3     3     3
+ 4     4     1
+ 5     5    10
+ 6     6     1
+ 7     7     2
+ 8     8     1
+ 9     9     1
+10    10     1
+# ℹ 774 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(compte_lignes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id              n         
+ Min.   :  1.0   Min.   : 1.000  
+ 1st Qu.:196.8   1st Qu.: 1.000  
+ Median :392.5   Median : 3.000  
+ Mean   :392.5   Mean   : 3.384  
+ 3rd Qu.:588.2   3rd Qu.: 5.000  
+ Max.   :784.0   Max.   :16.000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(compte_lignes<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="evolution-moyenne-approchée-par-une-régression" class="level4">
+<h4 class="anchored" data-anchor-id="evolution-moyenne-approchée-par-une-régression">Evolution moyenne approchée par une régression</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="fu">ggplot</span>(ams)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">group =</span> id), <span class="at">color=</span><span class="st">"grey30"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT), <span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">linewidth =</span> <span class="fl">0.75</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Temps depuis l'entrée dans l'étude (en dizaines d'années)"</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"qol"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1493 rows containing non-finite values (`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1209 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="spaghetti-plots" class="level4">
+<h4 class="anchored" data-anchor-id="spaghetti-plots">Spaghetti plots</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">##spaghettis plot</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>spagh_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ams, <span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">group =</span> <span class="fu">interaction</span>(id, CPAP), <span class="at">color =</span> <span class="fu">factor</span>(CPAP))) <span class="sc">+</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"CPAP"</span>) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No CPAP"</span>, <span class="st">"With CPAP"</span>))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>ams_cpap1_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ams_cpap1, <span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">group =</span> id, <span class="at">color =</span> <span class="fu">factor</span>(CPAP))) <span class="sc">+</span> </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"CPAP"</span>) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>ams_cpap0_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ams_cpap0, <span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">group =</span> id, <span class="at">color =</span> <span class="fu">factor</span>(CPAP))) <span class="sc">+</span> </span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"CPAP"</span>) <span class="sc">+</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>ams_cpap_change_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ams_cpap_change, <span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">group =</span> id, <span class="at">color =</span> <span class="fu">factor</span>(CPAP))) <span class="sc">+</span> </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"CPAP"</span>) <span class="sc">+</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>spagh_plot <span class="co">#plot de tous les indiv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1237 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ams_cpap0_plot <span class="co">#plot avec ceux qui ont CPAP = 0 tout du long</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1084 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ams_cpap1_plot <span class="co">#plot avec ceux qui ont CPAP = 1 tout du long</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 153 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>ams_cpap_change_plot <span class="co">#plot avec ceux qui ont CPAP = 0 puis 1 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 140 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>UMTOT <span class="ot">&lt;-</span> ams<span class="sc">$</span>UMSARS1and2_TOT <span class="sc">+</span> ams<span class="sc">$</span>UMSARS4</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>regSUM <span class="ot">&lt;-</span> <span class="fu">lm</span>(ams<span class="sc">$</span>SCHRAG_TOT<span class="sc">~</span>(ams<span class="sc">$</span>UMTOT))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regSUM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ams$SCHRAG_TOT ~ (ams$UMTOT))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-79.648 -14.554  -0.445  15.582  71.107 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 22.69049    2.17085   10.45   &lt;2e-16 ***
+ams$UMTOT    1.06406    0.03787   28.10   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 22.62 on 1113 degrees of freedom
+  (1538 observations deleted due to missingness)
+Multiple R-squared:  0.415, Adjusted R-squared:  0.4145 
+F-statistic: 789.6 on 1 and 1113 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>ams<span class="sc">$</span>UMTOTmul <span class="ot">&lt;-</span> ams<span class="sc">$</span>UMSARS1and2_TOT <span class="sc">*</span> ams<span class="sc">$</span>UMSARS4</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>regMul <span class="ot">&lt;-</span> <span class="fu">lm</span>(ams<span class="sc">$</span>SCHRAG_TOT<span class="sc">~</span>(ams<span class="sc">$</span>UMTOTmul))</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regMul)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ams$SCHRAG_TOT ~ (ams$UMTOTmul))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-75.188 -15.700  -0.385  15.900  77.638 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  52.318398   1.304944   40.09   &lt;2e-16 ***
+ams$UMTOTmul  0.182219   0.007079   25.74   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 23.42 on 1113 degrees of freedom
+  (1538 observations deleted due to missingness)
+Multiple R-squared:  0.3731,    Adjusted R-squared:  0.3726 
+F-statistic: 662.5 on 1 and 1113 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(regSUM,regMul)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+regSUM  3 10123.66
+regMul  3 10200.72</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="do">##reg SUM mieux</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ams<span class="sc">$</span>UMTOT, <span class="at">y=</span>ams<span class="sc">$</span>SCHRAG_TOT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># abline(reg$coefficients)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="modèles" class="level2">
+<h2 class="anchored" data-anchor-id="modèles">Modèles</h2>
+<section id="avec-schrag" class="level4">
+<h4 class="anchored" data-anchor-id="avec-schrag">Avec SCHRAG</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">##SCHRAG seul, intercept aleatoire</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>m1pente <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1pente)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC     BIC    logLik
+  10646.37 10666.6 -5319.187
+
+Random effects:
+ Formula: ~1 | id
+        (Intercept) Residual
+StdDev:    24.39016 16.60237
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 
+                      Value Std.Error  DF  t-value p-value
+(Intercept)        75.41368 1.2944907 651 58.25741       0
+delai_consult_vis0  6.04952 0.3128314 651 19.33796       0
+ Correlation: 
+                   (Intr)
+delai_consult_vis0 -0.32 
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-3.232779872 -0.492680513  0.003173265  0.501117984  3.149160471 
+
+Number of Observations: 1160
+Number of Groups: 508 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">##revient au meme que avec le jeu de données sans NA</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>m1NA <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> id, <span class="at">data=</span> amsNA, <span class="at">method=</span><span class="st">'ML'</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1NA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: amsNA 
+       AIC      BIC    logLik
+  10214.15 10234.21 -5103.075
+
+Random effects:
+ Formula: ~1 | id
+        (Intercept) Residual
+StdDev:    24.43105 16.36695
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 
+                      Value Std.Error  DF  t-value p-value
+(Intercept)        75.07320 1.3087444 616 57.36277       0
+delai_consult_vis0  6.11954 0.3242609 616 18.87228       0
+ Correlation: 
+                   (Intr)
+delai_consult_vis0 -0.321
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-3.29471898 -0.50270422  0.01311079  0.49280533  3.21484055 
+
+Number of Observations: 1114
+Number of Groups: 497 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="do">##SCHRAG seul, pente et intercept aleatoire</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>m1pente_int <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1pente_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC    logLik
+  10606.15 10636.49 -5297.076
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        26.166619 (Intr)
+delai_consult_vis0  4.464764 -0.302
+Residual           14.582889       
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 
+                      Value Std.Error  DF  t-value p-value
+(Intercept)        74.18300 1.3611247 651 54.50125       0
+delai_consult_vis0  7.38313 0.4843025 651 15.24488       0
+ Correlation: 
+                   (Intr)
+delai_consult_vis0 -0.414
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.92042887 -0.46904064 -0.01705109  0.47417192  3.28173875 
+
+Number of Observations: 1160
+Number of Groups: 508 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="do">##SCHRAG ajusté complet, pente et intercept aleatoire</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>m1complet <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0 <span class="sc">*</span> CPAP <span class="sc">+</span> DUREE_SYMPT_VIS0 <span class="sc">+</span> AGE_VISITE0 <span class="sc">+</span> UMSARS1and2_TOT <span class="sc">+</span> UMSARS4 <span class="sc">+</span> delaiDecesCensor <span class="sc">+</span> anyDC <span class="sc">+</span> DIAG0 <span class="sc">+</span> SPT1CERE <span class="sc">+</span> SPT1DYS <span class="sc">+</span> SEXE, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1complet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC    logLik
+  9779.724 9870.007 -4871.862
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        17.518280 (Intr)
+delai_consult_vis0  2.637332 -0.196
+Residual           13.694460       
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 * CPAP + DUREE_SYMPT_VIS0 + AGE_VISITE0 +      UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + anyDC + DIAG0 +      SPT1CERE + SPT1DYS + SEXE 
+                            Value Std.Error  DF   t-value p-value
+(Intercept)              39.91352  8.585807 611  4.648780  0.0000
+delai_consult_vis0        0.93007  0.549804 611  1.691639  0.0912
+CPAP1                    -9.55916  4.361889 611 -2.191518  0.0288
+DUREE_SYMPT_VIS0          0.39418  0.411248 489  0.958507  0.3383
+AGE_VISITE0              -0.17490  0.118975 489 -1.470043  0.1422
+UMSARS1and2_TOT           0.91488  0.074885 611 12.217209  0.0000
+UMSARS4                   1.93120  1.077731 611  1.791917  0.0736
+delaiDecesCensor         -1.49255  0.399039 489 -3.740356  0.0002
+anyDC1                   -0.43042  2.196307 489 -0.195975  0.8447
+DIAG01                   -3.39502  3.049894 489 -1.113160  0.2662
+SPT1CERE1                 4.71305  3.071194 611  1.534599  0.1254
+SPT1DYS1                  4.55389  1.923808 489  2.367125  0.0183
+SEXE1                     3.81618  1.892782 489  2.016176  0.0443
+delai_consult_vis0:CPAP1  0.92170  1.421764 611  0.648281  0.5170
+ Correlation: 
+                         (Intr) dl_c_0 CPAP1  DUREE_ AGE_VI UMSARS1 UMSARS4
+delai_consult_vis0        0.089                                            
+CPAP1                    -0.027  0.096                                     
+DUREE_SYMPT_VIS0         -0.131  0.156 -0.005                              
+AGE_VISITE0              -0.895  0.054  0.019 -0.022                       
+UMSARS1and2_TOT          -0.162 -0.419 -0.059 -0.135 -0.006                
+UMSARS4                   0.037 -0.080  0.010 -0.027 -0.053 -0.696         
+delaiDecesCensor         -0.289 -0.377 -0.029 -0.094  0.112  0.225   0.027 
+anyDC1                   -0.041  0.200  0.057 -0.023 -0.048 -0.152  -0.036 
+DIAG01                   -0.058 -0.051 -0.045 -0.087  0.032  0.039   0.030 
+SPT1CERE1                -0.072  0.014  0.016  0.144  0.009  0.008  -0.032 
+SPT1DYS1                 -0.164 -0.023 -0.010  0.120  0.028  0.027   0.030 
+SEXE1                    -0.137  0.081  0.079  0.034  0.028 -0.043  -0.060 
+delai_consult_vis0:CPAP1  0.030 -0.237 -0.697 -0.033 -0.023  0.041   0.010 
+                         dlDcsC anyDC1 DIAG01 SPT1CE SPT1DY SEXE1 
+delai_consult_vis0                                                
+CPAP1                                                             
+DUREE_SYMPT_VIS0                                                  
+AGE_VISITE0                                                       
+UMSARS1and2_TOT                                                   
+UMSARS4                                                           
+delaiDecesCensor                                                  
+anyDC1                   -0.182                                   
+DIAG01                    0.046 -0.015                            
+SPT1CERE1                -0.057 -0.008 -0.762                     
+SPT1DYS1                 -0.074 -0.073 -0.099  0.156              
+SEXE1                    -0.057  0.061 -0.006  0.073  0.115       
+delai_consult_vis0:CPAP1  0.020 -0.007  0.015 -0.015 -0.028 -0.044
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-3.59349078 -0.51540302 -0.01898571  0.49261016  3.88071039 
+
+Number of Observations: 1114
+Number of Groups: 497 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">##SCHRAG ajusté reduit, pente et intercept aleatoire</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>m1cut <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0 <span class="sc">+</span> CPAP <span class="sc">+</span> UMSARS1and2_TOT <span class="sc">+</span> UMSARS4 <span class="sc">+</span> delaiDecesCensor <span class="sc">+</span> SPT1DYS <span class="sc">+</span> SEXE, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC    logLik
+  9782.504 9842.703 -4879.252
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        17.757128 (Intr)
+delai_consult_vis0  2.592326 -0.234
+Residual           13.719132       
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 + CPAP + UMSARS1and2_TOT + UMSARS4 +      delaiDecesCensor + SPT1DYS + SEXE 
+                       Value Std.Error  DF   t-value p-value
+(Intercept)        30.147315  3.343299 613  9.017236  0.0000
+delai_consult_vis0  1.014341  0.509119 613  1.992345  0.0468
+CPAP1              -7.393426  3.096296 613 -2.387829  0.0173
+UMSARS1and2_TOT     0.916099  0.072813 613 12.581582  0.0000
+UMSARS4             1.889577  1.074091 613  1.759234  0.0790
+delaiDecesCensor   -1.360439  0.388426 494 -3.502437  0.0005
+SPT1DYS1            3.936651  1.886482 494  2.086769  0.0374
+SEXE1               3.747525  1.878353 494  1.995112  0.0466
+ Correlation: 
+                   (Intr) dl_c_0 CPAP1  UMSARS1 UMSARS4 dlDcsC SPT1DY
+delai_consult_vis0  0.474                                            
+CPAP1              -0.025 -0.118                                     
+UMSARS1and2_TOT    -0.501 -0.386 -0.035                              
+UMSARS4            -0.048 -0.068  0.027 -0.728                       
+delaiDecesCensor   -0.580 -0.372 -0.012  0.195   0.023               
+SPT1DYS1           -0.312 -0.036 -0.035  0.032   0.037  -0.072       
+SEXE1              -0.227  0.065  0.067 -0.038  -0.054  -0.046  0.106
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-3.57700962 -0.50609955 -0.01943962  0.48527902  3.87024172 
+
+Number of Observations: 1115
+Number of Groups: 498 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m1pente,m1pente_int,m1complet,m1cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in AIC.default(m1pente, m1pente_int, m1complet, m1cut): models are not
+all fitted to the same number of observations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            df       AIC
+m1pente      4 10646.374
+m1pente_int  6 10606.152
+m1complet   18  9779.724
+m1cut       12  9782.504</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(m1pente,m1pente_int,m1complet,m1cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in BIC.default(m1pente, m1pente_int, m1complet, m1cut): models are not
+all fitted to the same number of observations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            df       BIC
+m1pente      4 10666.599
+m1pente_int  6 10636.489
+m1complet   18  9870.007
+m1cut       12  9842.703</code></pre>
+</div>
+</div>
+</section>
+<section id="avec-umtot" class="level4">
+<h4 class="anchored" data-anchor-id="avec-umtot">Avec UMTOT</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="do">##UMTOT seul, intercept aleatoire</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>m2pente <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> UMTOT <span class="sc">~</span>delai_consult_vis0, <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2pente)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC    logLik
+  18421.53 18444.55 -9206.764
+
+Random effects:
+ Formula: ~1 | id
+        (Intercept) Residual
+StdDev:    15.23173 8.896836
+
+Fixed effects:  UMTOT ~ delai_consult_vis0 
+                      Value Std.Error   DF  t-value p-value
+(Intercept)        49.46157 0.6101952 1565 81.05861       0
+delai_consult_vis0  6.25868 0.1222399 1565 51.20000       0
+ Correlation: 
+                   (Intr)
+delai_consult_vis0 -0.212
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-3.533181515 -0.515492150  0.002318342  0.535759577  3.005225911 
+
+Number of Observations: 2332
+Number of Groups: 766 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="do">##UMTOT seul, pente et intercept aleatoire</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>m2pente_int <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> UMTOT <span class="sc">~</span>delai_consult_vis0, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2pente_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC    logLik
+  17576.52 17611.05 -8782.262
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        15.371389 (Intr)
+delai_consult_vis0  4.591619 0.06  
+Residual            5.536477       
+
+Fixed effects:  UMTOT ~ delai_consult_vis0 
+                      Value Std.Error   DF  t-value p-value
+(Intercept)        47.52189 0.5843350 1565 81.32646       0
+delai_consult_vis0  9.96469 0.2620747 1565 38.02234       0
+ Correlation: 
+                   (Intr)
+delai_consult_vis0 -0.067
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-3.769756896 -0.446443508  0.002700109  0.445480365  3.267594008 
+
+Number of Observations: 2332
+Number of Groups: 766 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">##UMTOT ajusté complet, pente et intercept aleatoire</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>m2complet <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> UMTOT <span class="sc">~</span> delai_consult_vis0 <span class="sc">*</span> CPAP <span class="sc">+</span> DUREE_SYMPT_VIS0 <span class="sc">+</span> AGE_VISITE0 <span class="sc">+</span> delaiDecesCensor <span class="sc">+</span> anyDC <span class="sc">+</span> DIAG0 <span class="sc">+</span> SPT1CERE <span class="sc">+</span> SPT1DYS <span class="sc">+</span> SEXE, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2complet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+       AIC      BIC   logLik
+  17214.02 17306.08 -8591.01
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        12.636754 (Intr)
+delai_consult_vis0  4.660845 -0.394
+Residual            5.525682       
+
+Fixed effects:  UMTOT ~ delai_consult_vis0 * CPAP + DUREE_SYMPT_VIS0 + AGE_VISITE0 +      delaiDecesCensor + anyDC + DIAG0 + SPT1CERE + SPT1DYS + SEXE 
+                            Value Std.Error   DF   t-value p-value
+(Intercept)              35.06510  4.023091 1561   8.71596  0.0000
+delai_consult_vis0        9.76096  0.266996 1561  36.55850  0.0000
+CPAP1                     0.47739  1.461875 1561   0.32656  0.7440
+DUREE_SYMPT_VIS0          1.84426  0.198592  757   9.28670  0.0000
+AGE_VISITE0               0.08158  0.057578  757   1.41684  0.1569
+delaiDecesCensor         -3.05864  0.191696  757 -15.95565  0.0000
+anyDC1                   11.88810  1.052831  757  11.29156  0.0000
+DIAG01                   -3.59647  1.457122  757  -2.46820  0.0138
+SPT1CERE1                 0.39217  1.439412 1561   0.27245  0.7853
+SPT1DYS1                 -3.06601  0.936868 1561  -3.27262  0.0011
+SEXE1                     4.18101  0.927596  757   4.50736  0.0000
+delai_consult_vis0:CPAP1 -0.02900  0.621023 1561  -0.04670  0.9628
+ Correlation: 
+                         (Intr) dl_c_0 CPAP1  DUREE_ AGE_VI dlDcsC anyDC1
+delai_consult_vis0       -0.030                                          
+CPAP1                    -0.002 -0.021                                   
+DUREE_SYMPT_VIS0         -0.170  0.005 -0.021                            
+AGE_VISITE0              -0.925  0.008 -0.003 -0.053                     
+delaiDecesCensor         -0.192 -0.158 -0.016  0.007  0.103              
+anyDC1                   -0.080  0.002  0.017 -0.095 -0.075 -0.182       
+DIAG01                   -0.084  0.004 -0.008 -0.036  0.059  0.030  0.024
+SPT1CERE1                -0.034 -0.013 -0.005  0.086 -0.015 -0.077 -0.005
+SPT1DYS1                 -0.117  0.008 -0.027  0.111 -0.004 -0.084 -0.046
+SEXE1                    -0.166 -0.004  0.024  0.026  0.009 -0.005  0.083
+delai_consult_vis0:CPAP1  0.014 -0.163 -0.634  0.004 -0.011  0.018  0.002
+                         DIAG01 SPT1CE SPT1DY SEXE1 
+delai_consult_vis0                                  
+CPAP1                                               
+DUREE_SYMPT_VIS0                                    
+AGE_VISITE0                                         
+delaiDecesCensor                                    
+anyDC1                                              
+DIAG01                                              
+SPT1CERE1                -0.737                     
+SPT1DYS1                 -0.067  0.119              
+SEXE1                     0.007  0.042  0.097       
+delai_consult_vis0:CPAP1 -0.003  0.003  0.000  0.000
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-3.77040541 -0.46092635 -0.01107281  0.45191195  3.31277113 
+
+Number of Observations: 2330
+Number of Groups: 764 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>m2cut <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> UMTOT <span class="sc">~</span> delai_consult_vis0 <span class="sc">+</span> CPAP <span class="sc">+</span> DUREE_SYMPT_VIS0 <span class="sc">+</span> delaiDecesCensor <span class="sc">+</span> anyDC <span class="sc">+</span> DIAG0 <span class="sc">+</span> SPT1DYS <span class="sc">+</span> SEXE, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams 
+      AIC     BIC    logLik
+  17210.1 17284.9 -8592.052
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        12.682035 (Intr)
+delai_consult_vis0  4.660377 -0.401
+Residual            5.525813       
+
+Fixed effects:  UMTOT ~ delai_consult_vis0 + CPAP + DUREE_SYMPT_VIS0 + delaiDecesCensor +      anyDC + DIAG0 + SPT1DYS + SEXE 
+                      Value Std.Error   DF   t-value p-value
+(Intercept)        40.42238 1.5170118 1563  26.64605  0.0000
+delai_consult_vis0  9.75607 0.2630691 1563  37.08558  0.0000
+CPAP1               0.45508 1.1291483 1563   0.40303  0.6870
+DUREE_SYMPT_VIS0    1.84808 0.1976608  758   9.34975  0.0000
+delaiDecesCensor   -3.09447 0.1902481  758 -16.26543  0.0000
+anyDC1             12.04734 1.0504246  758  11.46902  0.0000
+DIAG01             -3.40100 0.9825506  758  -3.46140  0.0006
+SPT1DYS1           -3.09499 0.9307246 1563  -3.32535  0.0009
+SEXE1               4.16795 0.9272492  758   4.49496  0.0000
+ Correlation: 
+                   (Intr) dl_c_0 CPAP1  DUREE_ dlDcsC anyDC1 DIAG01 SPT1DY
+delai_consult_vis0 -0.061                                                 
+CPAP1              -0.008 -0.163                                          
+DUREE_SYMPT_VIS0   -0.572  0.007 -0.025                                   
+delaiDecesCensor   -0.269 -0.163 -0.005  0.019                            
+anyDC1             -0.397  0.003  0.023 -0.099 -0.176                     
+DIAG01             -0.259 -0.009 -0.024  0.045 -0.047  0.034              
+SPT1DYS1           -0.306  0.010 -0.035  0.102 -0.076 -0.046  0.031       
+SEXE1              -0.414 -0.004  0.031  0.023 -0.003  0.084  0.056  0.093
+
+Standardized Within-Group Residuals:
+         Min           Q1          Med           Q3          Max 
+-3.771318951 -0.462040515 -0.009653709  0.452274971  3.319755947 
+
+Number of Observations: 2330
+Number of Groups: 764 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="do">## pas de lien CPAP UMTOT c'est marrant</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m2pente,m2pente_int,m2complet,m2cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in AIC.default(m2pente, m2pente_int, m2complet, m2cut): models are not
+all fitted to the same number of observations</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            df      AIC
+m2pente      4 18421.53
+m2pente_int  6 17576.52
+m2complet   16 17214.02
+m2cut       13 17210.10</code></pre>
+</div>
+</div>
+</section>
+<section id="lme-chez-ceux-qui-changent-de-groupe-cpap-0-à-1" class="level4">
+<h4 class="anchored" data-anchor-id="lme-chez-ceux-qui-changent-de-groupe-cpap-0-à-1">LME chez ceux qui changent de groupe (cpap 0 à 1)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>ams_cpap_change</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 298 × 14
+      id delai_consult_vis0 DUREE_SYMPT_VIS0 AGE_VISITE0 UMSARS1and2_TOT UMSARS4
+   &lt;int&gt;              &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+ 1     2              0                    2        62.9              18       1
+ 2     2              0.287                2        62.9              NA      NA
+ 3     2              1.57                 2        62.9              43       2
+ 4     2              2.75                 2        62.9              53       3
+ 5     2              3.42                 2        62.9              44       2
+ 6     2              3.58                 2        62.9              52       3
+ 7     2              3.65                 2        62.9              55       3
+ 8     2              4.27                 2        62.9              54       3
+ 9     2              4.44                 2        62.9              56       3
+10     2              4.67                 2        62.9              55       3
+# ℹ 288 more rows
+# ℹ 8 more variables: SCHRAG_TOT &lt;dbl&gt;, delaiDecesCensor &lt;dbl&gt;, anyDC &lt;fct&gt;,
+#   DIAG0 &lt;fct&gt;, SPT1CERE &lt;fct&gt;, SPT1DYS &lt;fct&gt;, SEXE &lt;fct&gt;, CPAP &lt;fct&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>m3complet <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed=</span> SCHRAG_TOT <span class="sc">~</span> delai_consult_vis0 <span class="sc">+</span> CPAP <span class="sc">+</span> DUREE_SYMPT_VIS0 <span class="sc">+</span> AGE_VISITE0 <span class="sc">+</span> UMSARS1and2_TOT <span class="sc">+</span> UMSARS4 <span class="sc">+</span> delaiDecesCensor <span class="sc">+</span> anyDC <span class="sc">+</span> DIAG0 <span class="sc">+</span> SPT1CERE <span class="sc">+</span> SPT1DYS <span class="sc">+</span> SEXE, <span class="at">random =</span> <span class="sc">~</span> delai_consult_vis0 <span class="sc">|</span> id, <span class="at">data=</span> ams_cpap_change, <span class="at">method=</span><span class="st">'ML'</span>, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3complet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: ams_cpap_change 
+       AIC      BIC    logLik
+  996.8104 1043.025 -481.4052
+
+Random effects:
+ Formula: ~delai_consult_vis0 | id
+ Structure: General positive-definite, Log-Cholesky parametrization
+                   StdDev    Corr  
+(Intercept)        19.749503 (Intr)
+delai_consult_vis0  2.592607 -0.879
+Residual           13.192214       
+
+Fixed effects:  SCHRAG_TOT ~ delai_consult_vis0 + CPAP + DUREE_SYMPT_VIS0 + AGE_VISITE0 +      UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + anyDC + DIAG0 +      SPT1CERE + SPT1DYS + SEXE 
+                      Value Std.Error DF   t-value p-value
+(Intercept)        56.62702  32.28704 66  1.753862  0.0841
+delai_consult_vis0 -0.15547   1.76842 66 -0.087913  0.9302
+CPAP1              -8.83680   5.62776 66 -1.570217  0.1211
+DUREE_SYMPT_VIS0   -0.56103   1.36270 33 -0.411706  0.6832
+AGE_VISITE0        -0.38138   0.43837 33 -0.869994  0.3906
+UMSARS1and2_TOT     1.11492   0.24560 66  4.539656  0.0000
+UMSARS4             1.65246   3.48999 66  0.473485  0.6374
+delaiDecesCensor   -1.09354   1.90774 33 -0.573214  0.5704
+anyDC1             -9.13873   7.84593 33 -1.164773  0.2525
+DIAG01              2.54682   9.92499 33  0.256607  0.7991
+SPT1CERE1          -1.97071  10.90250 33 -0.180757  0.8577
+SPT1DYS1            5.11614   6.93134 33  0.738118  0.4657
+SEXE1              -1.48147   7.37763 33 -0.200805  0.8421
+ Correlation: 
+                   (Intr) dl_c_0 CPAP1  DUREE_ AGE_VI UMSARS1 UMSARS4 dlDcsC
+delai_consult_vis0  0.208                                                   
+CPAP1              -0.018 -0.301                                            
+DUREE_SYMPT_VIS0    0.066  0.015  0.061                                     
+AGE_VISITE0        -0.900 -0.036 -0.014 -0.280                              
+UMSARS1and2_TOT    -0.229 -0.336 -0.313 -0.133  0.108                       
+UMSARS4             0.021 -0.088 -0.005 -0.008 -0.063 -0.620                
+delaiDecesCensor   -0.339 -0.562  0.045  0.071  0.123  0.196   0.079        
+anyDC1             -0.344  0.203  0.111 -0.186  0.299 -0.122  -0.017  -0.070
+DIAG01             -0.059 -0.068 -0.001 -0.087  0.007  0.078  -0.059   0.077
+SPT1CERE1          -0.038  0.099  0.018  0.177  0.055 -0.070   0.015  -0.316
+SPT1DYS1            0.038  0.040  0.062  0.368 -0.186 -0.012  -0.059  -0.208
+SEXE1               0.208  0.075  0.254 -0.337 -0.108 -0.154  -0.066  -0.367
+                   anyDC1 DIAG01 SPT1CE SPT1DY
+delai_consult_vis0                            
+CPAP1                                         
+DUREE_SYMPT_VIS0                              
+AGE_VISITE0                                   
+UMSARS1and2_TOT                               
+UMSARS4                                       
+delaiDecesCensor                              
+anyDC1                                        
+DIAG01              0.084                     
+SPT1CERE1          -0.130 -0.761              
+SPT1DYS1           -0.171 -0.065  0.198       
+SEXE1               0.044  0.005  0.030 -0.087
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.76410675 -0.53766290 -0.02432579  0.56853964  1.82655232 
+
+Number of Observations: 112
+Number of Groups: 42 </code></pre>
+</div>
+</div>
+</section>
+<section id="exploratoire" class="level4">
+<h4 class="anchored" data-anchor-id="exploratoire">Exploratoire</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># effets fixes prédits</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(m1cut, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"CPAP"</span>, <span class="st">"delai_consult_vis0"</span>))</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="do">##trajectoires individuelles</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ams, <span class="fu">aes</span>(<span class="at">x =</span> delai_consult_vis0, <span class="at">y =</span> SCHRAG_TOT, <span class="at">color =</span> CPAP, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span> CPAP), <span class="at">size =</span> <span class="fl">1.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1493 rows containing non-finite values (`stat_summary()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1209 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="adéquatiion" class="level4">
+<h4 class="anchored" data-anchor-id="adéquatiion">Adéquatiion</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m1cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(m1cut))</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(m1cut))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CClongit_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
