@@ -30,6 +30,7 @@ library(mice)
 ```
 
 ## Gestions des données
+
 ```{r, message=FALSE}
 ams <- readRDS("Data/database_ams_a_b_c.rds")
 head(ams)
@@ -44,7 +45,7 @@ ams$SEXE<- as.factor(ams$SEXE)
 ams$CPAP<- as.factor(ams$CPAP)
 ```
 
-Groupement pour avoir une ligne par individu. 
+Groupement pour avoir une ligne par individu.
 
 ```{r}
 ams2 <- ams %>% group_by(id) %>% arrange(desc(delai_consult_vis0)) %>% filter(row_number()==1) %>% arrange(id)
@@ -123,7 +124,7 @@ ams_cpap0 <- ams %>% filter(CPAP == 0)
 
 ```
 
-### Nombre de visites par individus 
+### Nombre de visites par individus
 
 ```{r}
 compte_lignes <- ams %>%count(id)
@@ -133,7 +134,7 @@ summary(compte_lignes)
 hist(compte_lignes$n)
 ```
 
-### Evolution moyenne approchée par une régression 
+### Evolution moyenne approchée par une régression
 
 ```{r}
 p <- (ggplot(ams)
@@ -195,7 +196,7 @@ plot(x = ams$UMTOT, y=ams$SCHRAG_TOT)
 # abline(reg$coefficients)
 ```
 
-## Modèles 
+## Modèles
 
 ### Avec SCHRAG
 
@@ -218,6 +219,9 @@ summary(m1complet)
 ##SCHRAG ajusté reduit, pente et intercept aleatoire
 m1cut <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 + CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1cut)
+
+m2complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0*(CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE), random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
+AIC(m2complet)
 
 AIC(m1pente,m1pente_int,m1complet,m1cut)
 BIC(m1pente,m1pente_int,m1complet,m1cut)
@@ -277,3 +281,22 @@ qqnorm(residuals(m1cut))
 qqline(residuals(m1cut))
 
 ```
+
+```{r}
+ams %>% select(CPAP, SCHRAG_TOT) %>% tbl_summary(by = CPAP)
+prop.test(c(1324, 169), c(2394, 259)) # aïe
+```
+
+
+```{r}
+data <- ams %>% 
+  mutate(date_cpap = ifelse(CPAP == 1, delai_consult_vis0, NA),
+         avant_apres = ifelse(delai_consult_vis0 < date_cpap, 0, 1), 
+         avant_apres = ifelse(is.na(avant_apres), 0, avant_apres))
+
+index <- unique(data$id[which(data$CPAP == 1)])
+data[data$id %in% index,] %>% select(SCHRAG_TOT, avant_apres) %>% tbl_summary(by= avant_apres)
+
+prop.test(c(48, 169), c(95, 259)) # aïe
+```
+
