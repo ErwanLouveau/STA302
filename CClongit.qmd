@@ -281,8 +281,10 @@ qqnorm(residuals(m1cut))
 qqline(residuals(m1cut))
 
 ```
+## Exploration NA
 
 ```{r}
+library(gtsummary)
 ams %>% select(CPAP, SCHRAG_TOT) %>% tbl_summary(by = CPAP)
 prop.test(c(1324, 169), c(2394, 259)) # aïe
 ```
