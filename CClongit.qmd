@@ -20,8 +20,15 @@ library(ggeffects)
 library(mice)
 ```
 
+<<<<<<< HEAD
 ```{r}
 ams <- readRDS("/Users/soizicdieulouard/Downloads/database_ams_a_b_c.rds")
+=======
+## Gestions des données
+
+```{r, message=FALSE}
+ams <- readRDS("Data/database_ams_a_b_c.rds")
+>>>>>>> d93a25fa33a65da5220dc7aee315619fc900025a
 head(ams)
 str(ams)
 ams$SEXE <- ifelse(ams$SEXE==1,0,1)
@@ -34,7 +41,11 @@ ams$SEXE<- as.factor(ams$SEXE)
 ams$CPAP<- as.factor(ams$CPAP)
 ```
 
+<<<<<<< HEAD
 Une ligne par indiv
+=======
+Groupement pour avoir une ligne par individu.
+>>>>>>> d93a25fa33a65da5220dc7aee315619fc900025a
 
 ```{r}
 ams2 <- ams %>% group_by(id) %>% arrange(desc(delai_consult_vis0)) %>% filter(row_number()==1) %>% arrange(id)
@@ -109,7 +120,11 @@ ams_cpap0 <- ams %>% filter(CPAP == 0)
 
 ```
 
+<<<<<<< HEAD
 Nb de visites par indiv:
+=======
+### Nombre de visites par individus
+>>>>>>> d93a25fa33a65da5220dc7aee315619fc900025a
 
 ```{r}
 compte_lignes <- ams %>%count(id)
@@ -119,7 +134,11 @@ summary(compte_lignes)
 hist(compte_lignes$n)
 ```
 
+<<<<<<< HEAD
 Evolution moyenne approchée par une régression
+=======
+### Evolution moyenne approchée par une régression
+>>>>>>> d93a25fa33a65da5220dc7aee315619fc900025a
 
 ```{r}
 p <- (ggplot(ams)
@@ -179,6 +198,13 @@ plot(x = ams$UMTOT, y=ams$SCHRAG_TOT)
 abline(reg$coefficients)
 ```
 
+<<<<<<< HEAD
+=======
+## Modèles
+
+### Avec SCHRAG
+
+>>>>>>> d93a25fa33a65da5220dc7aee315619fc900025a
 ```{r}
 ##SCHRAG seul, intercept aleatoire
 m1pente <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0, random = ~ 1 | id, data= ams, method='ML', na.action=na.omit)
@@ -198,6 +224,9 @@ summary(m1complet)
 ##SCHRAG ajusté reduit, pente et intercept aleatoire
 m1cut <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 + CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1cut)
+
+m2complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0*(CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE), random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
+AIC(m2complet)
 
 AIC(m1pente,m1pente_int,m1complet,m1cut)
 BIC(m1pente,m1pente_int,m1complet,m1cut)
@@ -259,3 +288,24 @@ qqnorm(residuals(m1cut))
 qqline(residuals(m1cut))
 
 ```
+## Exploration NA
+
+```{r}
+library(gtsummary)
+ams %>% select(CPAP, SCHRAG_TOT) %>% tbl_summary(by = CPAP)
+prop.test(c(1324, 169), c(2394, 259)) # aïe
+```
+
+
+```{r}
+data <- ams %>% 
+  mutate(date_cpap = ifelse(CPAP == 1, delai_consult_vis0, NA),
+         avant_apres = ifelse(delai_consult_vis0 < date_cpap, 0, 1), 
+         avant_apres = ifelse(is.na(avant_apres), 0, avant_apres))
+
+index <- unique(data$id[which(data$CPAP == 1)])
+data[data$id %in% index,] %>% select(SCHRAG_TOT, avant_apres) %>% tbl_summary(by= avant_apres)
+
+prop.test(c(48, 169), c(95, 259)) # aïe
+```
+
