@@ -317,3 +317,7 @@ data[data$id %in% index,] %>% select(SCHRAG_TOT, avant_apres) %>% tbl_summary(by
 prop.test(c(48, 169), c(95, 259)) # aïe
 ```
 
+```{r}
+data[!(data$id %in% index),] %>% select(SCHRAG_TOT) %>% tbl_summary()
+```
+
