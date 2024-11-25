@@ -1,18 +1,26 @@
 ---
-title: "CCLongitGroupees"
-format: html
+title: "CC STA302 : Modèles Mixtes"
+subtitle: "Master 2 Biostatistique 24/25 (ISPED)"
+format: 
+  html: 
+    theme: cosmo
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc-title: "Table des matières"
+    header-includes: |
+      <style>
+        h1 {color: #0F2769;}
+        h2 {color: #2148B2;}
+        h3 {color: #3C72DC;}
+        h4 {color: #90AEFF;}
+      </style>
 editor: visual
 ---
 
-## Quarto
+## Chargement des packages 
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
+```{r, warning=FALSE, message = FALSE}
 library(nlme)
 library(dplyr)
 library(ggplot2)
@@ -20,12 +28,9 @@ library(ggeffects)
 library(mice)
 ```
 
+## Gestion des données 
 
 ```{r}
-ams <- readRDS("/Users/soizicdieulouard/Downloads/database_ams_a_b_c.rds")
-
-## Gestions des données
-
 ams <- readRDS("Data/database_ams_a_b_c.rds")
 
 head(ams)
@@ -40,11 +45,7 @@ ams$SEXE<- as.factor(ams$SEXE)
 ams$CPAP<- as.factor(ams$CPAP)
 ```
 
-
-Une ligne par indiv
-
-Groupement pour avoir une ligne par individu.
-
+### Regroupement par individus
 
 ```{r}
 ams2 <- ams %>% group_by(id) %>% arrange(desc(delai_consult_vis0)) %>% filter(row_number()==1) %>% arrange(id)
@@ -54,12 +55,11 @@ summary(ams2)
 table(ams2$anyDC)
 ```
 
-NA:
+### Données manquantes
 
 ```{r}
 md.pattern(ams)
-ams
-##ams sans les données manquantes
+
 amsNA <- ams %>%
   filter(complete.cases(.)) %>%
   arrange(id)
@@ -67,9 +67,9 @@ amsNA <- ams %>%
 sum(is.na(amsNA))
 ```
 
-Individus qui changeraient de groupe CPAP au cours du temps:
+### Individus qui changent de groupe CPAP au cours du temps
 
-Passage de 1 à 0
+#### Passage de 1 à 0
 
 ```{r}
 
@@ -86,10 +86,11 @@ individuals_with_transition <- transitions %>%
   pull(id)
 
 print(individuals_with_transition)
-##pas d'individus avec un passage de CPAP 1 à 0
 ```
 
-Passage de statut CPAP=0 à 1
+IL n'y a aucun individus qui passe de 0 à 1. 
+
+#### Passage de statut CPAP de 0 à 1
 
 ```{r}
 ids_with_cpap_change <- ams %>%
@@ -103,24 +104,22 @@ ams_cpap_change <- ams %>%
 
 #on regroupe 1 ligne par indiv:
 ams_cpap_change_1 <- ams_cpap_change %>% group_by(id) %>% arrange(desc(delai_consult_vis0)) %>% filter(row_number()==1) %>% arrange(id)
-#53 individus passe de pas CPAP à CPAP
 ```
 
-Ceux qui ont CPAP = 1 tout du long
+Il y a 53 individus qui bénéficient d'une CPAP. 
+
+#### Ceux qui ont CPAP = 1 tout du long
 
 ```{r}
 ams_cpap1 <- ams %>% filter(CPAP == 1)
 ```
 
-Ceux qui ont CPAP = 0 tout du long
+#### Ceux qui ont CPAP = 0 tout du long
 
 ```{r}
 ams_cpap0 <- ams %>% filter(CPAP == 0)
-
 ```
 
-
-Nb de visites par indiv:
 
 ### Nombre de visites par individus
 
@@ -133,8 +132,6 @@ summary(compte_lignes)
 hist(compte_lignes$n)
 ```
 
-
-Evolution moyenne approchée par une régression
 
 ### Evolution moyenne approchée par une régression
 
@@ -180,6 +177,7 @@ ams_cpap_change_plot #plot avec ceux qui ont CPAP = 0 puis 1
 
 
 ```
+### Scores UMSARS
 
 ```{r}
 ams$UMTOT <- ams$UMSARS1and2_TOT + ams$UMSARS4
@@ -194,44 +192,55 @@ AIC(regSUM,regMul)
 ##reg SUM mieux
 
 plot(x = ams$UMTOT, y=ams$SCHRAG_TOT)
-abline(reg$coefficients)
+# abline(reg$coefficients)
 ```
 
 
 
 ## Modèles
 
-### Avec SCHRAG
+### Variable SCHRAG seule
 
+#### Intercept aléatoire
 
 ```{r}
-##SCHRAG seul, intercept aleatoire
 m1pente <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0, random = ~ 1 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1pente)
-##revient au meme que avec le jeu de données sans NA
+```
+Avec les données sans NA cela revient au même : 
+
+```{r}
 m1NA <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0, random = ~ 1 | id, data= amsNA, method='ML')
 summary(m1NA)
+```
 
-##SCHRAG seul, pente et intercept aleatoire
+#### Intercept + Pente aléatoire
+
+```{r}
+# Intercept ET pente aleatoire
 m1pente_int <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1pente_int)
+```
 
-##SCHRAG ajusté complet, pente et intercept aleatoire
+### Modèle complet
+
+```{r}
+# SCHRAG ajusté complet, pente et intercept aleatoire
 m1complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 * CPAP + DUREE_SYMPT_VIS0 + AGE_VISITE0 + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + anyDC + DIAG0 + SPT1CERE + SPT1DYS + SEXE, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1complet)
 
-##SCHRAG ajusté reduit, pente et intercept aleatoire
-m1cut <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 + CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
+# SCHRAG ajusté réduit, pente et intercept aléatoire
+m1cut <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 * CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE, random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 summary(m1cut)
 
-m2complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0*(CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE), random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
-AIC(m2complet)
+# SCHRAG ajuste réduit, pente et intercept aléatoire + interaction avec le temps
+m2cut <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0*(CPAP + UMSARS1and2_TOT + UMSARS4 + delaiDecesCensor + SPT1DYS + SEXE), random = ~ delai_consult_vis0 | id, data= ams, method='ML', na.action=na.omit)
 
-AIC(m1pente,m1pente_int,m1complet,m1cut)
-BIC(m1pente,m1pente_int,m1complet,m1cut)
+AIC(m1pente,m1pente_int,m1complet,m1cut, m2cut)
+BIC(m1pente,m1pente_int,m1complet,m1cut, m2cut)
 ```
 
-Si on essaye de faire un modèle avec UMTOT :
+### Variable UMTOT 
 
 ```{r}
 ##UMTOT seul, intercept aleatoire
@@ -253,7 +262,7 @@ summary(m2cut)
 AIC(m2pente,m2pente_int,m2complet,m2cut)
 ```
 
-LME chez ceux qui changent de groupe (cpap 0 à cpap 1)
+### LME chez ceux qui changent de groupe (cpap 0 à 1)
 
 ```{r}
 ams_cpap_change
@@ -264,30 +273,30 @@ m3complet <- lme(fixed= SCHRAG_TOT ~ delai_consult_vis0 + CPAP + DUREE_SYMPT_VIS
 summary(m3complet)
 ```
 
-Là c'est + exploratoire:
+## Explorations
+
+### Modèles 
 
 ```{r}
 # effets fixes prédits
 predictions <- ggpredict(m1cut, terms = c("CPAP", "delai_consult_vis0"))
 plot(predictions)
 
-##trajectoires individuelles
+# trajectoires individuelles
 ggplot(ams, aes(x = delai_consult_vis0, y = SCHRAG_TOT, color = CPAP, group = id)) +
   geom_line(alpha = 0.4) +
   stat_summary(fun = mean, geom = "line", aes(group = CPAP), size = 1.2)
-
-
 ```
 
-Adéquation
+### Adéquation
 
 ```{r}
 plot(m1cut)
 qqnorm(residuals(m1cut))
 qqline(residuals(m1cut))
-
 ```
-## Exploration NA
+
+### NA
 
 ```{r}
 library(gtsummary)
